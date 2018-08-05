@@ -3,10 +3,11 @@
 #pragma once
 
 #include "Engine/World.h"
-#include "Tank.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "AITankController.generated.h"
+
+class ATank;
 
 /**
  * 

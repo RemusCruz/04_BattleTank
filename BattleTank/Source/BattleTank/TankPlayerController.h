@@ -4,10 +4,11 @@
 
 #include "Engine/World.h"
 #include "Runtime/Engine/Classes/GameFramework//Controller.h"
-#include "Tank.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h" // Must be last include
+
+class ATank;
 
 /**
  * 
