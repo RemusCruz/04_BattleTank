@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "GameFramework/ProjectileMovementComponent.h"
+#include "Engine/World.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
@@ -21,6 +23,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 
+	void LaunchProjectile(float Speed);
 
-
+private:
+	UProjectileMovementComponent * ProjectileMovement = nullptr;
 };
