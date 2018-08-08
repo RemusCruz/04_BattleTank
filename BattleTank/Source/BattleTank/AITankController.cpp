@@ -21,11 +21,14 @@ void AAITankController::Tick(float DeltaTime)
 	if (PlayerTank)
 	{
 		// TODO Move towards the player
-
+		if (MoveToActor(PlayerTank, AcceptanceRadius, true, true, false, 0, true) == EPathFollowingRequestResult::Failed)
+		{
+			UE_LOG(LogTemp, Error, TEXT("PathFollowing request failed!"))
+		}
 		// Aim towards the player
 		ControlledTank->AimAt(PlayerTank->GetActorLocation());
 
-		ControlledTank->Fire(); // TODO limit firing rate
+		//ControlledTank->Fire(); // TODO limit firing rate
 	}
 }
 
