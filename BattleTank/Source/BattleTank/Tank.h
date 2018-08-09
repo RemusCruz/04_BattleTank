@@ -10,7 +10,6 @@
 
 // Forward declarations
 class UTankBarrel;
-class UTankAimingComponent;
 class AProjectile;
 
 UCLASS()
@@ -23,10 +22,6 @@ public:
 	void AimAt(FVector HitLocation);
 
 protected:
-
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent * TankAimingComponent = nullptr;
-
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 		void Fire();
 
@@ -38,6 +33,7 @@ private:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	// TODO remove once firing is moved to aiming component
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float LaunchSpeed = 4000;
 
