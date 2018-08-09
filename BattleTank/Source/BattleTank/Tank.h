@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "Projectile.h"
 #include "TankAimingComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
@@ -10,7 +9,6 @@
 
 // Forward declarations
 class UTankBarrel;
-class AProjectile;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -22,8 +20,7 @@ public:
 	void AimAt(FVector HitLocation);
 
 protected:
-	UFUNCTION(BlueprintCallable, Category = "Firing")
-		void Fire();
+
 
 
 private:
@@ -33,18 +30,8 @@ private:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	// TODO remove once firing is moved to aiming component
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float LaunchSpeed = 4000;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-		TSubclassOf<AProjectile> ProjectileBlueprint;
-
 	// Local barrel reference for spawning projectile
 	UTankBarrel* Barrel = nullptr; // TODO Remove
 
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float ReloadTimeInSeconds = 3;
 
-	double LastFireTime = 0;
 };
