@@ -3,7 +3,7 @@
 
 #include "AITankController.h"
 #include "Tank.h"
-
+// Depends on movement component via pathfinding system
 
 void AAITankController::BeginPlay()
 {
@@ -18,13 +18,11 @@ void AAITankController::Tick(float DeltaTime)
 	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	auto ControlledTank = Cast<ATank>(GetPawn());
 
-	if (PlayerTank)
+	if (ensure(PlayerTank))
 	{
 		// TODO Move towards the player
-		if (MoveToActor(PlayerTank, AcceptanceRadius, true, true, false, 0, true) == EPathFollowingRequestResult::Failed)
-		{
-			UE_LOG(LogTemp, Error, TEXT("PathFollowing request failed!"))
-		}
+		MoveToActor(PlayerTank, AcceptanceRadius, true, true, false, 0, true);
+
 		// Aim towards the player
 		ControlledTank->AimAt(PlayerTank->GetActorLocation());
 
