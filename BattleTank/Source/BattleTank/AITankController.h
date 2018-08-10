@@ -23,6 +23,7 @@ private:
 	virtual void Tick(float DeltaSeconds) override;
 
 	// How close can AI get to player
-	float AcceptanceRadius = 1000;
+	UPROPERTY(EditAnyWhere, Category = "Setup")
+	float AcceptanceRadius = 80000;
 
 };

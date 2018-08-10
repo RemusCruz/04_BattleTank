@@ -27,7 +27,10 @@ void AAITankController::Tick(float DeltaTime)
 		// Aim towards the player
 		AimingComponent->AimAt(PlayerTank->GetActorLocation());
 
-		AimingComponent->Fire(); // TODO fix firing
+		if (AimingComponent->GetFiringState() == EFiringState::Locked)
+		{
+			AimingComponent->Fire(); // TODO fix firing
+		}
 	}
 }
 
