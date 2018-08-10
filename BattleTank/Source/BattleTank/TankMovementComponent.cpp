@@ -20,7 +20,10 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	IntendMove(ForwardThrow);
 
 	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
-	IntendTurn(RightThrow);
+	IntendTurnRight(RightThrow);
+
+	auto LeftThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+	IntendTurnLeft(RightThrow);
 	//	UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *MoveVelocityString)
 }
 
@@ -33,7 +36,15 @@ void UTankMovementComponent::IntendMove(float Throw)
 	RightTrack->SetThrottle(Throw);
 }
 
-void UTankMovementComponent::IntendTurn(float Throw)
+void UTankMovementComponent::IntendTurnRight(float Throw)
+{
+	if (!ensure(LeftTrack && RightTrack)) { return; }
+
+	RightTrack->SetThrottle(Throw);
+	LeftTrack->SetThrottle(-Throw);
+}
+
+void UTankMovementComponent::IntendTurnLeft(float Throw)
 {
 	if (!ensure(LeftTrack && RightTrack)) { return; }
 

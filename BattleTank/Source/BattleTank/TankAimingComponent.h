@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Runtime/Core/Public/Math/Vector.h"
 #include "TankTurret.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "ControlPointMeshComponent.h"
@@ -36,11 +37,12 @@ public:
 	UTankAimingComponent();
 	
 	virtual void BeginPlay() override;
-
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
-	void MoveBarrelTowards(FVector AimDirection);
+	
 	void AimAt(FVector HitLocation);
+	void MoveBarrelTowards(FVector AimDirection);
+	bool IsBarrelMoving();
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 		void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
@@ -57,7 +59,7 @@ private:
 
 	UTankBarrel * Barrel = nullptr;
 	UTankTurret * Turret = nullptr;
-
+	
 	// TODO remove once firing is moved to aiming component
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float LaunchSpeed = 4000;
@@ -69,6 +71,8 @@ private:
 		float ReloadTimeInSeconds = 3;
 
 	double LastFireTime = 0;
+
+	FVector AimDirection;
 
 
 };
