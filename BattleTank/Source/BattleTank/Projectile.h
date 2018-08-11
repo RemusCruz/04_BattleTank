@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "Runtime/Engine/Classes/PhysicsEngine/RadialForceComponent.h"
+#include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Engine/World.h"
 #include "CoreMinimal.h"
@@ -25,12 +27,26 @@ public:
 
 	void LaunchProjectile(float Speed);
 
-private:
-	UProjectileMovementComponent * ProjectileMovement = nullptr;
+	UPROPERTY(BlueprintReadWrite, Category = "Components")
+		UParticleSystemComponent* ImpactBlast = nullptr;
 
+private:	
+	
+	void OnTimerExpire();
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+		float DestroyDelay = 10.f;
+
+	UFUNCTION()
+		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
+	UProjectileMovementComponent * ProjectileMovement = nullptr;
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 		UStaticMeshComponent* CollisionMesh = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 		UParticleSystemComponent* LaunchBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		URadialForceComponent* ExplosionForce = nullptr;
 };
