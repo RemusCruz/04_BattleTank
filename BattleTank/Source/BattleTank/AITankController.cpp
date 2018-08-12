@@ -26,7 +26,8 @@ void AAITankController::SetPawn(APawn* InPawn)
 
 void AAITankController::OnPossedTankDeath()
 {
-	if (GetPawn()) {return;}
+	if (!ensure(GetPawn())) { return; } // TODO remove if ok
+	UE_LOG(LogTemp, Warning, TEXT("Succeed"));
 	GetPawn()->DetachFromControllerPendingDestroy();
 }
 
