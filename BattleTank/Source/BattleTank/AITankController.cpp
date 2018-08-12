@@ -11,6 +11,26 @@ void AAITankController::BeginPlay()
 	Super::BeginPlay();
 }
 
+void AAITankController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		// Subscribe our local method to the tank's death event
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &AAITankController::OnPossedTankDeath);
+	}
+}
+
+void AAITankController::OnPossedTankDeath()
+{
+	if (GetPawn()) {return;}
+	GetPawn()->DetachFromControllerPendingDestroy();
+}
+
+
 // Called every frame
 void AAITankController::Tick(float DeltaTime)
 {

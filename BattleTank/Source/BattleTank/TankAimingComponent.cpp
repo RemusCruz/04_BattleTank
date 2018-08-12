@@ -92,6 +92,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 	// If no solution found do nothing
 }
 
+// Begins the movement of Tank Turret + Barrel
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	if (!ensure(Barrel) || !ensure(Turret)) { return; }
@@ -113,6 +114,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	}
 }
 
+// Fires Tank Projectile
 void UTankAimingComponent::Fire()
 {
 	if (FiringState == EFiringState::Locked || FiringState == EFiringState::Aiming)

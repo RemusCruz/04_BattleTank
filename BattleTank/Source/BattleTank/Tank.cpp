@@ -14,20 +14,22 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+	CurrentHealth = StartingHealth;
+}
 
 float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser)
 {
 	int32 DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
 	int32 DamageToApply = FMath::Clamp(DamagePoints, 0, CurrentHealth);
 
-	UE_LOG(LogTemp, Warning, TEXT("DONKEY: DamageAmount = %f,  CurrentHealth = %i"), DamageAmount, CurrentHealth)
-
-
-
 	CurrentHealth -= DamageToApply;
 	if (CurrentHealth <= 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Tank died"))
+		UE_LOG(LogTemp, Warning, TEXT("Tank = dead"));
+		OnDeath.Broadcast();
 	}
 	return DamageToApply;
 }
