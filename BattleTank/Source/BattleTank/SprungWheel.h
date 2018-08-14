@@ -2,6 +2,7 @@
 
 #pragma once
  
+#include "Runtime/Engine/Classes/Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/PhysicsEngine/PhysicsConstraintComponent.h"
 #include "CoreMinimal.h"
@@ -30,10 +31,13 @@ private:
 	void SetupConstraint();
 
 	// Components
-	//UPROPERTY(VisibleAnywhere, Category = "Components")
-	//	UStaticMeshComponent* Wheel = nullptr;
 
-	//UPROPERTY(VisibleAnywhere, Category = "Components")
-	//	UPhysicsConstraintComponent* MassWheelConstraint = nullptr;
-
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		USphereComponent* Wheel = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		USphereComponent* Axle = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		UPhysicsConstraintComponent* MassWheelConstraint = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		UPhysicsConstraintComponent* AxleWheelConstraint = nullptr;
 };
